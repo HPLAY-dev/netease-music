@@ -1,20 +1,20 @@
-# Netease Music Player
-This projects creates a Netease Music API(weapi) wrapper, API is created in an **UNETHICAL** way, so **DO NOT DISTRIBUTE** this project. This project does not implement all functions of Netease Music Client (Impossible), but I still hope to create a tool simple and powerful enough for everyone to use.
+# 网易云音乐
+该项目使用网易云音乐`weapi`实现开源客户端，基于Flask
 
-HTML files of the project relies on AI a lot. Therefore, it might be hard to maintain.
-## How to use
-Initialize:
+*注：html文件基本使用ai实现*
+## 如何使用
+初始化（仅在需要播放VIP歌曲与高音质时需要）
 
-1. Login into web-version Netease Music
-2. Play a VIP song and get `NMTID` and `MUSIC_U` in cookies (search `m4a` in F12-Developer Tools(en traslation unchecked.) > Networks, then get the keys in COOKIES)
-3. Write them into a json `{"NMTID": "", "MUSIC_U": ""}`
+1. 在网页版网易云音乐登录VIP账号
+2. 播放一首VIP歌曲，在F12开发人员工具的Network (网络)页面查看该请求，在COOKIES中获取 `NMTID` 与 `MUSIC_U`
+3. 写入json `{"NMTID": "", "MUSIC_U": ""}`
 
-Run:
+运行:
 
-1. Run `server.py`
-2. Open browser at `localhost:5000`(PC version) and `localhost:5000/mobile`(Mobile version, NOT UPDATED with pc version)
+1. 在**项目目录下**运行 `server.py`
+2. 打开浏览器，进入`http://localhost:5000`
    
-## Requirements
+## 需求（pip安装）
 - requests
 - flask
 - pycryptodome
