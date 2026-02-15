@@ -146,7 +146,6 @@ class NeteaseMusicAPI:
             "id": str(artist_id),
             "csrf_token": self._get_csrf()
         }
-        # 使用注释中提到的 weapi 路径
         return self._make_request("artist/top/song", data)
     
     def get_album(self, album_id):
