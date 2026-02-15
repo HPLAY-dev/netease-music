@@ -1,0 +1,9 @@
+*.flac
+*.mp3
+*.m4a
+__pycache__/
+test_*.*
+output/
+compare/
+build/
+.venv

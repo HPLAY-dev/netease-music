@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netease Music Player</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" id="kw" placeholder="搜索歌曲...">
+            <button type="button" id="clear-btn" title="清空">✕</button>
+            <button type="button" id="search-btn">搜索</button>
+            <button type="button" onclick="toggleDarkMode()" style="background:none; border:1px solid var(--border-color); color:var(--text-main); border-radius:20px; padding:5px 15px; cursor:pointer;">🌓 模式</button>
+        </div>
+
+        <div id="info-header" style="display:none; padding: 25px; background: var(--bg-color); border-bottom: 1px solid var(--border-color);">
+            <div style="display: flex; gap: 20px; align-items: flex-start;">
+                <img id="info-big-pic" src="" style="width: 150px; height: 150px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); object-fit: cover;">
+                <div style="flex: 1;">
+                    <h2 id="info-title" style="margin: 0 0 10px 0; color: var(--text-main);">名称</h2>
+                    <div id="info-type" style="display:inline-block; padding:2px 8px; background:var(--main-color); color:white; border-radius:4px; font-size:12px; margin-bottom:8px;">类型</div>
+                    <div id="info-desc" style="font-size: 14px; color: var(--text-sub); line-height: 1.6; max-height: 120px; overflow-y: auto; white-space: pre-wrap;">
+                        简介加载中...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 歌单列表（仅在开始页显示） -->
+        <div id="playlists" class="playlists" style="display:none; padding: 18px 20px 0 20px;"></div>
+
+        <div id="song-list"></div>
+
+        <!-- 歌单选择器（浮层） -->
+        <div id="playlist-picker" class="playlist-picker" aria-hidden="true" style="display:none;"></div>
+
+        <div id="pagination" style="padding: 20px; display: flex; justify-content: center; align-items: center; gap: 15px; border-top: 1px solid var(--border-color);">
+            <button id="prev-btn" style="padding: 6px 15px; border-radius: 15px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-main); cursor: pointer;" disabled>上一页</button>
+            <span id="page-num" style="font-size: 14px; color: var(--text-sub);">第 1 页</span>
+            <button id="next-btn" style="padding: 6px 15px; border-radius: 15px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-main); cursor: pointer;">下一页</button>
+        </div>
+    </div>
+
+    <div id="full-player">
+        <span class="close-full" onclick="toggleFullPlayer()">✕</span>
+        <div class="full-content" id="full-pages">
+            <div class="full-left page album-page" role="group" aria-label="Album Page">
+                <div class="album-card">
+                    <img id="big-cover" class="big-cover-img" src="">
+                    <div class="album-info-box">
+                        <div class="info-label">专辑</div>
+                        <div id="detail-album" class="info-value">-</div>
+                        <div class="info-label">发行日期</div>
+                        <div id="detail-date" class="info-value">-</div>
+                    </div>
+                </div>
+            </div>
+            <div class="full-right page" role="group" aria-label="Lyrics Page">
+                <div class="full-right-header">
+                    <div id="full-title" style="font-size: 24px; font-weight: bold;">歌曲</div>
+                    <div id="fp-artist" style="font-size: 14px; color: var(--main-color); font-weight: 500; opacity: 0.9; margin-top: 4px;">歌手加载中...</div>
+                </div>
+                <div class="lyric-window" id="lrc-window">
+                    <div id="lyric-container"></div>
+                </div>
+            </div>
+        </div>
+        <div class="page-indicator" id="page-indicator" aria-hidden="false">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
+
+    <!-- Toast 系统 -->
+    <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    <div class="player-bar">
+        <div class="progress-container" onclick="seek(event)">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+        
+        <div class="bar-left" onclick="toggleFullPlayer()">
+            <img id="bar-cover-img" class="bar-cover" src="">
+            <div class="bar-info">
+                <span id="bar-song-name" class="bar-song-name">未在播放</span>
+                <span id="bar-artist-name" style="font-size: 12px; color: var(--text-sub);">Ready</span>
+            </div>
+        </div>
+
+        <div id="bar-lrc-preview" class="bar-mid"></div>
+
+        <div class="bar-right">
+            <select id="quality-selector" class="quality-select" onchange="changeQuality(this.value)">
+                <option value="hires">Hi-Res</option>
+                <option value="standard">标准</option>
+                <option value="higher">较高</option>
+                <option value="exhigh">极高</option>
+                <option value="lossless">无损</option>
+            </select>
+            <button id="play-mode-btn" title="播放模式" class="icon-mode" onclick="cyclePlayMode()">顺序</button>
+            <img id="play-btn-img" class="play-toggle-icon" src="/html/assets/play.svg" onclick="togglePlay()">
+            <span style="cursor:pointer; font-size:20px; opacity:0.6; margin-left:15px" onclick="toggleFullPlayer()">▲</span>
+        </div>
+    </div>
+
+    <audio id="main-audio"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>

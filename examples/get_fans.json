@@ -1,0 +1,80 @@
+{
+    "code": 200,
+    "more": false,
+    "followeds": [
+        {
+            "py": "lyzr",
+            "time": 1770350243079,
+            "avatarUrl": "http://p2.music.126.net/oSX_3uHnTRSwzkZB0tDnvg==/109951171516758039.jpg",
+            "authStatus": 0,
+            "gender": 1,
+            "expertTags": null,
+            "experts": null,
+            "accountStatus": 0,
+            "vipType": 11,
+            "avatarDetail": null,
+            "userType": 0,
+            "mutual": false,
+            "remarkName": null,
+            "nickname": "凌夜之人",
+            "followeds": 3,
+            "follows": 41,
+            "followed": false,
+            "userId": 7794840204,
+            "signature": "",
+            "vipRights": {
+                "associator": {
+                    "vipCode": 100,
+                    "rights": true,
+                    "iconUrl": "https://p6.music.126.net/obj/wonDlsKUwrLClGjCm8Kx/32582188100/ca7f/f3f7/f591/a142a567c050a4a860ee77765270db57.png"
+                },
+                "musicPackage": {
+                    "vipCode": 220,
+                    "rights": true,
+                    "iconUrl": "https://p5.music.126.net/obj/wonDlsKUwrLClGjCm8Kx/21892874340/50e6/e81d/5292/2d693cbb98954e28d4d9fdb11be99a8b.png"
+                },
+                "redplus": null,
+                "redVipAnnualCount": -1,
+                "redVipLevel": 5,
+                "relationType": 0,
+                "memberLogo": null,
+                "extInfo": null
+            },
+            "eventCount": 15,
+            "playlistCount": 6
+        },
+        {
+            "py": "xndpg",
+            "time": 1756097804555,
+            "avatarUrl": "http://p2.music.126.net/6T0oPYk8w-lMUkWIpbSF5w==/18782957139059666.jpg",
+            "authStatus": 0,
+            "gender": 1,
+            "expertTags": null,
+            "experts": null,
+            "accountStatus": 0,
+            "vipType": 0,
+            "avatarDetail": null,
+            "userType": 0,
+            "mutual": false,
+            "remarkName": null,
+            "nickname": "犀牛炖排骨",
+            "followeds": 14,
+            "follows": 75,
+            "followed": false,
+            "userId": 261475085,
+            "signature": "",
+            "vipRights": {
+                "associator": null,
+                "musicPackage": null,
+                "redplus": null,
+                "redVipAnnualCount": -1,
+                "redVipLevel": 0,
+                "relationType": 0,
+                "memberLogo": null,
+                "extInfo": null
+            },
+            "eventCount": 1,
+            "playlistCount": 13
+        }
+    ]
+}
