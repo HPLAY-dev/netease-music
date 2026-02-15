@@ -11,7 +11,6 @@ import requests
 # from bs4 import BeautifulSoup
 
 class NeteaseMusicEncrypt:
-    """网易云音乐 Web 端 weapi 加密模块"""
     def __init__(self):
         self.pub_key = "010001"
         self.modulus = "00e0b509f6259df8642dbc35662901477df22677ec152b5ff68ace615bb7b725152b3ab17a876aea8a5aa76d2e417629ec4ee341f56135fccf695280104e0312ecbda92557c93870114af6c9d05c4f7f0c3685b7a46bee255932575cce10b424d813cfe4875d3e82047b97ddef52741d546b8e289dc6935b3ece0462db0a22b8e7"
@@ -41,8 +40,7 @@ class NeteaseMusicEncrypt:
         return {"params": enc_text, "encSecKey": enc_sec_key}
 
 class NeteaseMusicAPI:
-    """合并后的增强版 API 客户端"""
-    
+
     DEFAULT_HEADERS = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Edg/144.0.0.0',
         'Referer': 'https://music.163.com/',
@@ -68,7 +66,6 @@ class NeteaseMusicAPI:
         return self.cookies.get('__csrf', '')
 
     def _make_request(self, endpoint, data):
-        """通用加密请求发送器"""
         payload = self.encryptor.encrypt(data)
         url = f'https://music.163.com/weapi/{endpoint}?csrf_token={self._get_csrf()}'
         resp = requests.post(url, headers=self.headers, cookies=self.cookies, data=payload)
@@ -164,7 +161,6 @@ class NeteaseMusicAPI:
     
     # --- 核心音频获取接口 ---
     def get_song_url(self, song_id, level="lossless"):
-        """获取播放链接（带码率映射映射）"""
         br_map = {
             "standard": "128000",
             "higher": "192000",
@@ -184,7 +180,6 @@ class NeteaseMusicAPI:
 
     # --- 增强下载功能 ---
     def download(self, url, filename):
-        """带身份验证的下载，防止 403"""
         with requests.get(url, headers=self.dl_headers, cookies=self.cookies, stream=True) as r:
             if r.status_code >= 400:
                 print(f"下载失败: {r.status_code}. 请检查 Cookie 是否过期。")
@@ -197,7 +192,6 @@ class NeteaseMusicAPI:
 
     @classmethod
     def from_raw_cookie_str(cls, cookie_str):
-        """直接从浏览器复制的 curl cookie 字符串创建实例"""
         cookies = {}
         for item in cookie_str.split(';'):
             item = item.strip()
